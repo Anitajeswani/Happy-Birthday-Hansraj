@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Hansraj ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d0509;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .badge-border {
+            border: 1px solid rgba(244, 114, 182, 0.4);
+            background: rgba(255, 192, 203, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(20, 10, 15, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 114, 182, 0.25);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: #ec4899;
+            opacity: 0.3;
+            animation: floatHeart 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Flame animation */
+        .flame {
+            width: 16px;
+            height: 28px;
+            background: linear-gradient(to bottom, #fef08a, #f97316, #ef4444);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.6s infinite alternate;
+            box-shadow: 0 0 20px #f97316, 0 0 40px #ef4444;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* 3D Greeting Card Flip */
+        .card-3d {
+            perspective: 1200px;
+        }
+        .card-inner {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-inner.is-open {
+            transform: rotateY(-180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Polaroid Photo Card Style */
+        .polaroid {
+            background: #fff;
+            padding: 12px 12px 35px 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: rotate(-1.5deg);
+            transition: all 0.5s ease;
+        }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative pb-20">
+
+    <!-- Floating Background Hearts -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Audio Element & Fixed Music Control Button -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="fixed top-6 right-6 z-50 flex items-center gap-3 bg-pink-950/95 border border-pink-500/60 px-5 py-3 rounded-full backdrop-blur-md shadow-2xl">
+        <span class="text-xs text-pink-300 font-semibold tracking-wide">🎵 Play Romantic Music</span>
+        <button onclick="toggleMusic()" id="musicToggleBtn" class="w-9 h-9 rounded-full bg-pink-600 flex items-center justify-center text-white text-xs hover:bg-pink-500 transition shadow-lg">
+            <i id="musicIcon" class="fas fa-play"></i>
+        </button>
+    </div>
+
+    <!-- FULL SCREEN CONTAINER -->
+    <div class="w-full max-w-6xl mx-auto px-4 md:px-8 pt-8 relative z-10 space-y-16">
+
+        <!-- 1. ENRICHED HERO BANNER -->
+        <section class="text-center space-y-6 pt-8">
+            <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full badge-border text-pink-300 text-xs md:text-sm font-semibold tracking-widest uppercase shadow-inner animate-pulse">
+                <span>✨</span> 6 YEARS OF UNBREAKABLE LOVE & SOULMATES <span>✨</span>
+            </div>
+
+            <h1 class="text-5xl md:text-8xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-amber-100 to-pink-300 leading-tight py-2">
+                Happy Birthday <br><span class="text-pink-400">Hansraj</span>
+            </h1>
+
+            <p class="text-pink-200 text-base md:text-xl font-medium tracking-wide">
+                29th October • The Day My Favorite Person Was Born ❤️
+            </p>
+
+            <!-- Live Togetherness Counter -->
+            <div class="glass-card max-w-xl mx-auto p-5 rounded-2xl border border-pink-500/30 shadow-xl mt-6">
+                <p class="text-xs text-pink-300 font-semibold uppercase tracking-wider mb-3">Our Journey Together So Far ✨</p>
+                <div class="grid grid-cols-4 gap-2 text-center">
+                    <div class="bg-black/40 p-2 rounded-xl border border-pink-500/20">
+                        <span class="text-xl md:text-2xl font-bold text-pink-100">06</span>
+                        <p class="text-[10px] text-gray-400 uppercase">Years</p>
+                    </div>
+                    <div class="bg-black/40 p-2 rounded-xl border border-pink-500/20">
+                        <span class="text-xl md:text-2xl font-bold text-pink-100">72</span>
+                        <p class="text-[10px] text-gray-400 uppercase">Months</p>
+                    </div>
+                    <div class="bg-black/40 p-2 rounded-xl border border-pink-500/20">
+                        <span class="text-xl md:text-2xl font-bold text-pink-100">2,190</span>
+                        <p class="text-[10px] text-gray-400 uppercase">Days</p>
+                    </div>
+                    <div class="bg-black/40 p-2 rounded-xl border border-pink-500/20">
+                        <span class="text-xl md:text-2xl font-bold text-pink-100">∞</span>
+                        <p class="text-[10px] text-gray-400 uppercase">Love</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. TOP CANDLE & CAKE BLOW SECTION -->
+        <section class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6 max-w-3xl mx-auto border-2 border-pink-500/30">
+            <h2 class="text-2xl md:text-3xl font-bold text-pink-200">Make A Wish & Blow The Candle! 🎂</h2>
+            <p class="text-xs md:text-sm text-gray-300">Tap the candle flame to blow it out & unlock my magical wish for you!</p>
+
+            <div class="relative flex flex-col items-center justify-center my-8">
+                <div id="candleFlame" onclick="blowCandle()" class="flame cursor-pointer mb-1 transition-all duration-500"></div>
+                <div class="w-4 h-16 bg-gradient-to-b from-pink-300 to-pink-500 rounded-t-sm shadow-md"></div>
+                <div class="w-48 md:w-56 h-16 bg-gradient-to-r from-pink-600 via-rose-500 to-pink-600 rounded-t-2xl shadow-xl flex items-center justify-center text-sm md:text-base text-pink-100 font-bold tracking-wider">
+                    ❤️ HANSRAJ ❤️
+                </div>
+                <div class="w-56 md:w-64 h-12 bg-pink-900 rounded-b-xl shadow-2xl border-t-2 border-pink-400/40"></div>
+            </div>
+
+            <button id="wishBtn" onclick="blowCandle()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-10 rounded-full shadow-2xl transform active:scale-95 transition text-sm md:text-base">
+                Blow Candle ✨
+            </button>
+        </section>
+
+        <!-- 3. REAL 3D STORY BOOK (8 Pages for H-A-N-S-R-A-J) -->
+        <section class="glass-card p-6 md:p-10 rounded-3xl space-y-6 max-w-5xl mx-auto text-center">
+            <div class="space-y-1">
+                <h3 class="text-2xl md:text-4xl font-bold text-pink-200">Our Love Story Book</h3>
+                <p class="text-xs text-gray-300">Flip through the pages dedicated to H-A-N-S-R-A-J (Left: Photo | Right: Wish) 📖✨</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-neutral-900 via-zinc-900 to-neutral-900 border-4 border-pink-500/40 p-6 md:p-8 rounded-3xl min-h-[420px] flex flex-col justify-between relative shadow-2xl">
+                
+                <div class="flex justify-between items-center pb-4 border-b border-pink-500/20">
+                    <span id="pageLetter" class="text-xs md:text-sm uppercase tracking-widest text-pink-300 font-bold px-4 py-1 rounded-full bg-pink-950/80 border border-pink-500/40">
+                        H - Heartbeat
+                    </span>
+                    <span id="pageIndicator" class="text-xs text-pink-200 font-medium">Page 1 of 8</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 items-center">
+                    <!-- Changed object-cover to object-contain so full pic shows -->
+                    <div class="bg-black/40 p-3 rounded-2xl border border-pink-500/30 h-72 md:h-80 flex items-center justify-center overflow-hidden shadow-inner">
+                        <img id="bookImg" src="pic1.jpeg" class="w-full h-full object-contain rounded-xl">
+                    </div>
+
+                    <div class="bg-pink-950/40 p-6 md:p-8 rounded-2xl border border-pink-500/30 h-72 md:h-80 flex flex-col justify-center items-center text-center shadow-inner">
+                        <i class="fas fa-heart text-pink-400 text-2xl mb-3 animate-pulse"></i>
+                        <p id="bookWish" class="text-sm md:text-base font-medium text-pink-100 leading-relaxed">
+                            "You are the very heartbeat of my life, Hansraj. Every moment with you is pure magic!"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-pink-500/20">
+                    <button onclick="prevBookPage()" class="bg-pink-950/80 hover:bg-pink-900 text-pink-300 border border-pink-500/40 px-6 py-2.5 rounded-full text-xs font-semibold shadow-lg transition flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Previous Page
+                    </button>
+                    <button onclick="nextBookPage()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white px-6 py-2.5 rounded-full text-xs font-semibold shadow-lg transition flex items-center gap-2">
+                        Next Page <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LOVE QUIZ -->
+        <section class="glass-card p-8 md:p-12 rounded-3xl space-y-6 max-w-3xl mx-auto text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-pink-200">How Well Do You Know Us? 🧠💕</h3>
+            <p id="quizQuestion" class="text-sm text-gray-300 font-medium">Question: What is my absolute favorite thing about you?</p>
+            
+            <div id="quizOptions" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <button onclick="checkQuiz(0)" class="bg-pink-950/50 border border-pink-500/30 hover:border-pink-400 p-4 rounded-xl text-xs font-semibold text-pink-100 transition">Your kind heart & smile 😊</button>
+                <button onclick="checkQuiz(1)" class="bg-pink-950/50 border border-pink-500/30 hover:border-pink-400 p-4 rounded-xl text-xs font-semibold text-pink-100 transition">Your support in everything 🌟</button>
+                <button onclick="checkQuiz(2)" class="bg-pink-950/50 border border-pink-500/30 hover:border-pink-400 p-4 rounded-xl text-xs font-semibold text-pink-100 transition">Your endless caring nature 💕</button>
+                <button onclick="checkQuiz(3)" class="bg-pink-950/50 border border-pink-500/30 hover:border-pink-400 p-4 rounded-xl text-xs font-semibold text-pink-100 transition">All of the above! (Correct!) 🎉</button>
+            </div>
+            <p id="quizFeedback" class="text-xs font-semibold text-pink-300 mt-2 h-6"></p>
+        </section>
+
+        <!-- FUTURE BUCKET LIST -->
+        <section class="glass-card p-8 md:p-12 rounded-3xl space-y-6 max-w-4xl mx-auto">
+            <div class="text-center space-y-2">
+                <h3 class="text-3xl md:text-4xl font-bold text-pink-200">Our Future Bucket List ✈️💍</h3>
+                <p class="text-xs md:text-sm text-gray-300">Dreams and milestones we are going to achieve together!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                <div class="bg-pink-950/30 border border-pink-500/30 p-6 rounded-2xl space-y-3">
+                    <i class="fas fa-plane-departure text-pink-400 text-2xl"></i>
+                    <h4 class="text-base font-bold text-pink-200">Dream Vacation</h4>
+                    <p class="text-xs text-gray-300">Traveling to our favorite dream destination hand in hand. 🌍</p>
+                </div>
+                <div class="bg-pink-950/30 border border-pink-500/30 p-6 rounded-2xl space-y-3">
+                    <i class="fas fa-home text-amber-300 text-2xl"></i>
+                    <h4 class="text-base font-bold text-pink-200">Our Forever Home</h4>
+                    <p class="text-xs text-gray-300">Building a warm, peaceful home filled with laughter and love. 🏡</p>
+                </div>
+                <div class="bg-pink-950/30 border border-pink-500/30 p-6 rounded-2xl space-y-3">
+                    <i class="fas fa-infinity text-pink-400 text-2xl"></i>
+                    <h4 class="text-base font-bold text-pink-200">A Lifetime Together</h4>
+                    <p class="text-xs text-gray-300">Celebrating 50+ more birthdays by each other's side. ♾️</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SIDE-BY-SIDE: GREETING CARD & POLAROID MEMORIES -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            <!-- OPENABLE 3D GREETING CARD -->
+            <section class="glass-card p-6 md:p-8 rounded-3xl space-y-4 text-center flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-pink-200">A Deep Birthday Letter</h3>
+                    <p class="text-xs text-gray-300 mt-1">Tap the card to open & read my special letter 💌</p>
+                </div>
+
+                <div class="card-3d w-full h-96 relative cursor-pointer my-4" onclick="toggleCard()">
+                    <div id="greetingCard" class="card-inner w-full h-full relative">
+                        
+                        <!-- FRONT OF CARD -->
+                        <div class="card-front absolute inset-0 glass-card p-6 rounded-3xl flex flex-col items-center justify-center border-2 border-pink-400/40 text-center space-y-4 bg-gradient-to-b from-pink-950/60 to-black/80">
+                            <div class="w-20 h-20 bg-pink-500/20 rounded-full flex items-center justify-center border border-pink-400/30 text-pink-300 text-4xl shadow-lg">
+                                🎈
+                            </div>
+                            <h4 class="text-2xl font-bold text-pink-300">Happy Birthday My Love</h4>
+                            <p class="text-xs text-gray-300">Hansraj • 29th October</p>
+                            <div class="px-6 py-2.5 rounded-full bg-pink-500 text-white text-xs font-semibold shadow-lg animate-pulse">
+                                Tap To Open Card 💌
+                            </div>
+                        </div>
+
+                        <!-- INSIDE BACK OF CARD -->
+                        <div class="card-back absolute inset-0 glass-card p-6 rounded-3xl flex flex-col justify-between border-2 border-pink-400/50 text-left bg-gradient-to-b from-pink-950/90 to-black">
+                            <div class="space-y-3 overflow-y-auto pr-1">
+                                <p class="text-sm font-bold text-pink-300">My Dearest Hansraj,</p>
+                                <p class="text-xs md:text-sm text-gray-200 leading-relaxed font-normal">
+                                    Happy Birthday to the most extraordinary man in my life! Looking back at our <strong>6 beautiful years together</strong>, my heart swells with endless pride and love. You are not just my partner; you are my best friend, my rock, and my home.
+                                </p>
+                                <p class="text-xs md:text-sm text-gray-200 leading-relaxed font-normal">
+                                    Your kindness, patience, and unwavering love inspire me every single day. As we step into another magnificent year, I promise to walk beside you through every high and low, supporting your big dreams and building our beautiful future together.
+                                </p>
+                            </div>
+                            <div class="text-right pt-3 border-t border-pink-500/20">
+                                <p class="text-sm font-bold text-pink-300">Forever & Always Yours ❤️</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- POLAROID STYLE AUTO-PLAYING MEMORIES SECTION -->
+            <section class="glass-card p-6 md:p-8 rounded-3xl space-y-4 text-center flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-pink-200">Hansraj's Special Moments</h3>
+                    <p class="text-xs text-gray-300 mt-1">Auto-playing polaroid memories of him ✨</p>
+                </div>
+
+                <!-- Polaroid Frame Container -->
+                <div class="flex items-center justify-center my-4">
+                    <div class="polaroid w-72 md:w-80 rounded-lg">
+                        <!-- Changed object-cover to object-contain so full pic shows inside polaroid -->
+                        <div class="w-full h-64 md:h-72 overflow-hidden rounded bg-neutral-900 flex items-center justify-center">
+                            <img id="polaroidImg" src="pic9.jpeg" class="w-full h-full object-contain transition-all duration-700">
+                        </div>
+                        <div class="pt-3 text-center">
+                            <p id="polaroidCaption" class="text-xs md:text-sm font-medium text-neutral-800">
+                                "6 years of pure grace and handsome smiles! ❤️"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <span id="polaroidCounter" class="text-xs text-pink-300 font-semibold">1 / 8</span>
+                    <button onclick="nextPolaroid()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-2 px-6 rounded-full text-xs shadow-xl transition flex items-center gap-2">
+                        <span>Next Photo</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 5. ENHANCED GRAND ENDING / FOOTER SECTION -->
+        <section class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6 max-w-4xl mx-auto border-2 border-pink-500/40 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 text-pink-500/10 text-9xl pointer-events-none">♾️</div>
+            
+            <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full flex items-center justify-center mx-auto text-2xl shadow-2xl animate-bounce">
+                💖
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="text-3xl md:text-4xl font-bold text-pink-200">Our Forever Promise</h3>
+                <p class="text-sm text-pink-300 font-medium tracking-wide">6 Years Down • Infinite Lifetimes To Go ✨</p>
+            </div>
+
+            <p class="text-xs md:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                "Hansraj, no matter where life takes us, my heart will always find its home in yours. Thank you for being my greatest blessing, my safest shelter, and my truest love. Happy Birthday once again to my entire world! 🎂❤️"
+            </p>
+
+            <div class="pt-4 border-t border-pink-500/20 flex flex-col md:flex-row justify-center items-center gap-4 text-xs text-gray-400">
+                <span>🎉 Special Birthday Celebration for Hansraj</span>
+                <span>•</span>
+                <span>29th October</span>
+                <span>•</span>
+                <span>Crafted with Endless Love ❤️</span>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Floating Background Hearts
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+            heart.style.fontSize = Math.random() * 12 + 12 + 'px';
+            container.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 8000);
+        }
+        setInterval(createHeart, 500);
+
+        // Music Play/Pause Toggle Logic
+        const music = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+            } else {
+                music.play().then(() => {
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                }).catch(err => console.log(err));
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // H-A-N-S-R-A-J 8-Page Story Book Data (pic1.jpeg se pic8.jpeg tak)
+        const bookPages = [
+            { letter: 'H - Heartbeat', img: 'pic1.jpeg', wish: '“You are the very heartbeat of my life, Hansraj. Every moment with you is pure magic!”' },
+            { letter: 'A - Adoration', img: 'pic2.jpeg', wish: '“May this 29th October bring you closer to all your biggest career and life ambitions.”' },
+            { letter: 'N - Neverending', img: 'pic3.jpeg', wish: '“Our 6 years together have proven that our bond is unbreakable and everlasting.”' },
+            { letter: 'S - Strength', img: 'pic4.jpeg', wish: '“Thank you for being my anchor in every storm. Your strength inspires me everyday.”' },
+            { letter: 'R - Romance', img: 'pic5.jpeg', wish: '“Every glance, every smile, and every sweet laugh we share is my favorite treasure.”' },
+            { letter: 'A - Ambition', img: 'pic6.jpeg', wish: '“Here is to building our future home and achieving our biggest goals together.”' },
+            { letter: 'J - Joy', img: 'pic7.jpeg', wish: '“You brought unmeasurable joy and light into my world. Happy Birthday my love!”' },
+            { letter: 'H - Forever', img: 'pic8.jpeg', wish: '“6 years down, a lifetime of infinite love and beautiful memories to go. I love you!”' }
+        ];
+
+        let currentBookPage = 0;
+
+        function renderBookPage() {
+            const page = bookPages[currentBookPage];
+            document.getElementById('pageLetter').innerText = page.letter;
+            document.getElementById('pageIndicator').innerText = `Page ${currentBookPage + 1} of 8`;
+            document.getElementById('bookImg').src = page.img;
+            document.getElementById('bookWish').innerText = page.wish;
+        }
+
+        function nextBookPage() {
+            currentBookPage = (currentBookPage + 1) % bookPages.length;
+            renderBookPage();
+        }
+
+        function prevBookPage() {
+            currentBookPage = (currentBookPage - 1 + bookPages.length) % bookPages.length;
+            renderBookPage();
+        }
+
+        renderBookPage();
+
+        // Love Quiz Logic
+        function checkQuiz(selectedIdx) {
+            const fb = document.getElementById('quizFeedback');
+            if (selectedIdx === 3) {
+                fb.innerText = "🎉 Absolutely correct! You know me best! ❤️";
+                confetti({ particleCount: 80, spread: 60 });
+            } else {
+                fb.innerText = "💖 Haha close! Try selecting the correct option!";
+            }
+        }
+
+        // Polaroid Memories Data (pic9.jpeg se pic16.jpeg tak)
+        const polaroidData = [
+            { url: 'pic9.jpeg', cap: '"6 years of pure grace and handsome smiles! ❤️"' },
+            { url: 'pic10.jpeg', cap: '"Your confidence and charm light up every room! ✨"' },
+            { url: 'pic11.jpeg', cap: '"My favorite person with the most genuine heart! 💕"' },
+            { url: 'pic12.jpeg', cap: '"Looking sharp and conquering all your goals! 🌟"' },
+            { url: 'pic13.jpeg', cap: '"The man who holds my entire heart and soul! 🎂"' },
+            { url: 'pic14.jpeg', cap: '"Forever my king and my biggest pride! 👑❤️"' },
+            { url: 'pic15.jpeg', cap: '"Every moment with you is a blessing! ✨"' },
+            { url: 'pic16.jpeg', cap: '"To a lifetime of infinite happiness together! ♾️❤️"' }
+        ];
+        let polaroidIndex = 0;
+
+        function nextPolaroid() {
+            polaroidIndex = (polaroidIndex + 1) % polaroidData.length;
+            const img = document.getElementById('polaroidImg');
+            const cap = document.getElementById('polaroidCaption');
+            const counter = document.getElementById('polaroidCounter');
+
+            img.style.opacity = '0.2';
+            setTimeout(() => {
+                img.src = polaroidData[polaroidIndex].url;
+                cap.innerText = polaroidData[polaroidIndex].cap;
+                counter.innerText = `${polaroidIndex + 1} / ${polaroidData.length}`;
+                img.style.opacity = '1';
+            }, 300);
+        }
+
+        setInterval(() => { nextPolaroid(); }, 4000);
+
+        // Toggle Greeting Card
+        function toggleCard() {
+            document.getElementById('greetingCard').classList.toggle('is-open');
+        }
+
+        // Candle Blowing & Confetti
+        function blowCandle() {
+            const flame = document.getElementById('candleFlame');
+            const btn = document.getElementById('wishBtn');
+            flame.style.opacity = '0';
+            flame.style.transform = 'scale(0)';
+            btn.innerText = "Wish Made! ❤️";
+
+            confetti({
+                particleCount: 140,
+                spread: 90,
+                origin: { y: 0.5 }
+            });
+        }
+    </script>
+</body>
+</html>
